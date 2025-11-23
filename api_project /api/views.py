@@ -1,18 +1,15 @@
-from rest_framework import generics, viewsets
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
+from rest_framework import viewsets, permissions
 from .models import Book
 from .serializers import BookSerializer
 
-# Simple ListAPIView
+# Existing ListAPIView (optional)
+from rest_framework import generics
 class BookList(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-# Full CRUD using ViewSet
+# Full CRUD ViewSet
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
+    permission_classes = [permissions.IsAuthenticated]  # Only authenticated users can modify
