@@ -1,0 +1,10 @@
+# Python cache files
+*.pyc
+__pycache__/
+
+# Django local database
+db.sqlite3
+
+# Virtual environments
+venv/
+api_project/api_project/venv/
