@@ -1,4 +1,5 @@
-python manage.py shell
+# Retrieve all books
 from bookshelf.models import Book
 Book.objects.all()
-Book.objects.get(id=1)
+# Expected output: <QuerySet [<Book: 1984>]>
+
