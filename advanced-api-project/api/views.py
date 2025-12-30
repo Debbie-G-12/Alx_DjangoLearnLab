@@ -5,9 +5,8 @@ from .serializers import BookSerializer
 
 class BookListCreateView(generics.ListCreateAPIView):
     """
-    Handles:
-    - GET: List all books (public)
-    - POST: Create a new book (authenticated users only)
+    GET: List all books (public)
+    POST: Create a book (authenticated users only)
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -20,10 +19,9 @@ class BookListCreateView(generics.ListCreateAPIView):
 
 class BookRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Handles:
-    - GET: Retrieve a book (public)
-    - PUT/PATCH: Update a book (authenticated)
-    - DELETE: Delete a book (authenticated)
+    GET: Retrieve a book (public)
+    PUT/PATCH: Update a book (authenticated)
+    DELETE: Delete a book (authenticated)
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
