@@ -1,51 +1,37 @@
-from rest_framework import generics, filters, permissions
-from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, permissions
 from .models import Book
 from .serializers import BookSerializer
 
-# ----------------------------
-# Book Views for DRF API
-# ----------------------------
 
-# List view with filtering, searching, and ordering
+# List all books (Read-only, public)
 class BookListView(generics.ListAPIView):
-    """
-    API endpoint that allows users to view all books.
-    Supports:
-    - Filtering by title, author name, and publication year
-    - Searching by title and author name
-    - Ordering by title and publication year
-    """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['title', 'author__name', 'publication_year']  # filtering
-    search_fields = ['title', 'author__name']  # search
-    ordering_fields = ['title', 'publication_year']  # ordering
-    ordering = ['title']  # default ordering
+    permission_classes = [permissions.AllowAny]
 
-# Retrieve a single book
+
+# Retrieve a single book by ID (Read-only, public)
 class BookDetailView(generics.RetrieveAPIView):
-    """
-    API endpoint to retrieve a single book by ID.
-    """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [permissions.AllowAny]  # accessible by anyone
+    permission_classes = [permissions.AllowAny]
 
-# Create a new book (authenticated users only)
+
+# Create a new book (Authenticated users only)
 class BookCreateView(generics.CreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-# Update an existing book (authenticated users only)
+
+# Update an existing book (Authenticated users only)
 class BookUpdateView(generics.UpdateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-# Delete a book (authenticated users only)
+
+# Delete a book (Authenticated users only)
 class BookDeleteView(generics.DestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
