@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,9 @@ TEMPLATES = [
         },
     },
 ]
+TEMPLATES[0]['DIRS'] = [BASE_DIR / 'templates']
+
+
 
 WSGI_APPLICATION = 'django_blog.wsgi.application'
 
